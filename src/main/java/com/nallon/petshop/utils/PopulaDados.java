@@ -1,12 +1,16 @@
 package com.nallon.petshop.utils;
 
 import com.nallon.petshop.domain.Categoria;
+import com.nallon.petshop.domain.Cidade;
 import com.nallon.petshop.domain.Especie;
+import com.nallon.petshop.domain.Estado;
 import com.nallon.petshop.domain.Pet;
 import com.nallon.petshop.domain.Produto;
 import com.nallon.petshop.domain.Raca;
 import com.nallon.petshop.repository.CategoriaRepository;
+import com.nallon.petshop.repository.CidadeRepository;
 import com.nallon.petshop.repository.EspecieRepository;
+import com.nallon.petshop.repository.EstadoRepository;
 import com.nallon.petshop.repository.PetRepository;
 import com.nallon.petshop.repository.ProdutoRepository;
 import com.nallon.petshop.repository.RacaRepository;
@@ -29,6 +33,10 @@ public class PopulaDados {
   private RacaRepository racaRepository;
   @Autowired
   private PetRepository petRepository;
+  @Autowired
+  private EstadoRepository estadoRepository;
+  @Autowired
+  private CidadeRepository cidadeRepository;
 
   @PostConstruct
   public void cadastrar() {
@@ -66,5 +74,18 @@ public class PopulaDados {
     especieRepository.saveAll(Arrays.asList(especie1, especie2));
     racaRepository.saveAll(Arrays.asList(raca1, raca2, raca3));
     petRepository.saveAll(Arrays.asList(pet1, pet2, pet3));
+
+    Estado est1 = new Estado(null, "Minas Gerais");
+    Estado est2 = new Estado(null, "São Paulo");
+
+    Cidade c1 = new Cidade(null, "Belo Horizonte", est1);
+    Cidade c2 = new Cidade(null, "Capelinha", est1);
+    Cidade c3 = new Cidade(null, "São Paulo", est2);
+
+    est1.getCidades().addAll(Arrays.asList(c1, c2));
+    est2.getCidades().add(c3);
+    
+    estadoRepository.saveAll(Arrays.asList(est1, est2));
+    cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
   }
 }

@@ -2,6 +2,7 @@ package com.nallon.petshop.domain;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
@@ -20,7 +21,7 @@ public class Especie implements Serializable {
   private Integer id;
   private String descricao;
   @OneToMany(mappedBy = "especie")
-  private List<Pet> pets;
+  private List<Pet> pets = new ArrayList<>();
 
   public Especie() {
   }

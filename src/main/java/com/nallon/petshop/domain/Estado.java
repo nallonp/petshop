@@ -12,24 +12,23 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Raca implements Serializable {
+public class Estado implements Serializable {
 
   @Serial
   private static final long serialVersionUID = 1L;
+  @OneToMany(mappedBy = "estado")
+  private List<Cidade> cidades = new ArrayList<>();
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
-  private String descricao;
+  private String nome;
 
-  @OneToMany(mappedBy = "raca")
-  private List<Pet> pets = new ArrayList<>();
-
-  public Raca() {
+  public Estado() {
   }
 
-  public Raca(Integer id, String descricao) {
+  public Estado(Integer id, String nome) {
     this.id = id;
-    this.descricao = descricao;
+    this.nome = nome;
   }
 
   @Override
@@ -40,8 +39,8 @@ public class Raca implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Raca raca = (Raca) o;
-    return Objects.equals(id, raca.id);
+    Estado estado = (Estado) o;
+    return Objects.equals(id, estado.id);
   }
 
   @Override
@@ -57,19 +56,19 @@ public class Raca implements Serializable {
     this.id = id;
   }
 
-  public String getDescricao() {
-    return descricao;
+  public String getNome() {
+    return nome;
   }
 
-  public void setDescricao(String descricao) {
-    this.descricao = descricao;
+  public void setNome(String nome) {
+    this.nome = nome;
   }
 
-  public List<Pet> getPets() {
-    return pets;
+  public List<Cidade> getCidades() {
+    return cidades;
   }
 
-  public void setPets(List<Pet> pets) {
-    this.pets = pets;
+  public void setCidades(List<Cidade> cidades) {
+    this.cidades = cidades;
   }
 }

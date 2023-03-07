@@ -2,34 +2,34 @@ package com.nallon.petshop.domain;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Raca implements Serializable {
+public class Cidade implements Serializable {
 
   @Serial
   private static final long serialVersionUID = 1L;
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
-  private String descricao;
+  private String nome;
+  @ManyToOne
+  @JoinColumn(name = "id_estado")
+  private Estado estado;
 
-  @OneToMany(mappedBy = "raca")
-  private List<Pet> pets = new ArrayList<>();
-
-  public Raca() {
+  public Cidade() {
   }
 
-  public Raca(Integer id, String descricao) {
+  public Cidade(Integer id, String nome, Estado estado) {
     this.id = id;
-    this.descricao = descricao;
+    this.nome = nome;
+    this.estado = estado;
   }
 
   @Override
@@ -40,8 +40,8 @@ public class Raca implements Serializable {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Raca raca = (Raca) o;
-    return Objects.equals(id, raca.id);
+    Cidade cidade = (Cidade) o;
+    return Objects.equals(id, cidade.id);
   }
 
   @Override
@@ -57,19 +57,19 @@ public class Raca implements Serializable {
     this.id = id;
   }
 
-  public String getDescricao() {
-    return descricao;
+  public String getNome() {
+    return nome;
   }
 
-  public void setDescricao(String descricao) {
-    this.descricao = descricao;
+  public void setNome(String nome) {
+    this.nome = nome;
   }
 
-  public List<Pet> getPets() {
-    return pets;
+  public Estado getEstado() {
+    return estado;
   }
 
-  public void setPets(List<Pet> pets) {
-    this.pets = pets;
+  public void setEstado(Estado estado) {
+    this.estado = estado;
   }
 }
