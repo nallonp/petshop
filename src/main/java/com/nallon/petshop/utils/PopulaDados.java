@@ -31,12 +31,12 @@ public class PopulaDados {
 
     cat1.getProdutos().addAll(Arrays.asList(p1, p2));
     cat2.getProdutos().addAll(Arrays.asList(p3, p4));
-    cat3.getProdutos().add(p4);
+    cat3.getProdutos().add(p3);
 
     p1.getCategorias().add(cat1);
     p2.getCategorias().add(cat1);
-    p3.getCategorias().add(cat2);
-    p4.getCategorias().addAll(Arrays.asList(cat2, cat3));
+    p3.getCategorias().addAll(Arrays.asList(cat2, cat3));
+    p4.getCategorias().add(cat2);
     categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
     produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4));
   }

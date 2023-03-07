@@ -1,5 +1,6 @@
 package com.nallon.petshop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class Produto implements Serializable {
   private Integer id;
   private String nome;
   private Double preco;
+  @JsonIgnore
   @ManyToMany
   @JoinTable(name = "PRODUTO_CATEGORIA",
       joinColumns = @JoinColumn(name = "id_produto"),
