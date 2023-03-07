@@ -1,9 +1,15 @@
 package com.nallon.petshop.utils;
 
 import com.nallon.petshop.domain.Categoria;
+import com.nallon.petshop.domain.Especie;
+import com.nallon.petshop.domain.Pet;
 import com.nallon.petshop.domain.Produto;
+import com.nallon.petshop.domain.Raca;
 import com.nallon.petshop.repository.CategoriaRepository;
+import com.nallon.petshop.repository.EspecieRepository;
+import com.nallon.petshop.repository.PetRepository;
 import com.nallon.petshop.repository.ProdutoRepository;
+import com.nallon.petshop.repository.RacaRepository;
 import java.util.Arrays;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +23,12 @@ public class PopulaDados {
 
   @Autowired
   private ProdutoRepository produtoRepository;
+  @Autowired
+  private EspecieRepository especieRepository;
+  @Autowired
+  private RacaRepository racaRepository;
+  @Autowired
+  private PetRepository petRepository;
 
   @PostConstruct
   public void cadastrar() {
@@ -39,5 +51,20 @@ public class PopulaDados {
     p4.getCategorias().add(cat2);
     categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
     produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4));
+
+    Especie especie1 = new Especie(null, "Cachorro");
+    Especie especie2 = new Especie(null, "Gato");
+
+    Raca raca1 = new Raca(null, "Shitzu");
+    Raca raca2 = new Raca(null, "Akita");
+    Raca raca3 = new Raca(null, "Persa");
+
+    Pet pet1 = new Pet(null, "John", 6, especie1, raca1);
+    Pet pet2 = new Pet(null, "Hanna", 5, especie1, raca2);
+    Pet pet3 = new Pet(null, "Mewth", 8, especie2, raca3);
+
+    especieRepository.saveAll(Arrays.asList(especie1, especie2));
+    racaRepository.saveAll(Arrays.asList(raca1, raca2, raca3));
+    petRepository.saveAll(Arrays.asList(pet1, pet2, pet3));
   }
 }
