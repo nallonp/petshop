@@ -1,5 +1,6 @@
 package com.nallon.petshop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,12 +17,13 @@ public class Estado implements Serializable {
 
   @Serial
   private static final long serialVersionUID = 1L;
-  @OneToMany(mappedBy = "estado")
-  private List<Cidade> cidades = new ArrayList<>();
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
   private String nome;
+  @JsonIgnore
+  @OneToMany(mappedBy = "estado")
+  private List<Cidade> cidades = new ArrayList<>();
 
   public Estado() {
   }

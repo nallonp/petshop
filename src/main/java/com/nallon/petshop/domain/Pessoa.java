@@ -25,18 +25,19 @@ public class Pessoa implements Serializable {
 
   @Serial
   private static final long serialVersionUID = 1L;
-  @OneToMany(mappedBy = "pessoa")
-  private final List<Endereco> enderecos = new ArrayList<>();
-  @ElementCollection
-  @CollectionTable(name = "TELEFONE", joinColumns = @JoinColumn(name = "ID_PESSOA"))
-  @Column(name = "NUMERO")
-  private final Set<String> telefones = new HashSet<>();
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
   private String nome;
   private String email;
   private String codNacional;
+
+  @ElementCollection
+  @CollectionTable(name = "TELEFONE", joinColumns = @JoinColumn(name = "ID_PESSOA"))
+  @Column(name = "NUMERO")
+  private Set<String> telefones = new HashSet<>();
+  @OneToMany(mappedBy = "pessoa")
+  private List<Endereco> enderecos = new ArrayList<>();
 
   public Pessoa() {
   }
@@ -101,7 +102,15 @@ public class Pessoa implements Serializable {
     return enderecos;
   }
 
+  public void setEnderecos(List<Endereco> enderecos) {
+    this.enderecos = enderecos;
+  }
+
   public Set<String> getTelefones() {
     return telefones;
+  }
+
+  public void setTelefones(Set<String> telefones) {
+    this.telefones = telefones;
   }
 }

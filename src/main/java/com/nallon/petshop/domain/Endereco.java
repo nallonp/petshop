@@ -1,5 +1,6 @@
 package com.nallon.petshop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,6 +24,7 @@ public class Endereco {
   @ManyToOne
   @JoinColumn(name = "ID_CIDADE")
   private Cidade cidade;
+  @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "ID_PESSOA")
   private Pessoa pessoa;
@@ -59,5 +61,67 @@ public class Endereco {
     return Objects.hash(id);
   }
 
+  public Integer getId() {
+    return id;
+  }
 
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public String getLogradouro() {
+    return logradouro;
+  }
+
+  public void setLogradouro(String logradouro) {
+    this.logradouro = logradouro;
+  }
+
+  public String getNumero() {
+    return numero;
+  }
+
+  public void setNumero(String numero) {
+    this.numero = numero;
+  }
+
+  public String getComplemento() {
+    return complemento;
+  }
+
+  public void setComplemento(String complemento) {
+    this.complemento = complemento;
+  }
+
+  public String getBairro() {
+    return bairro;
+  }
+
+  public void setBairro(String bairro) {
+    this.bairro = bairro;
+  }
+
+  public String getCep() {
+    return cep;
+  }
+
+  public void setCep(String cep) {
+    this.cep = cep;
+  }
+
+  public Cidade getCidade() {
+    return cidade;
+  }
+
+  public void setCidade(Cidade cidade) {
+    this.cidade = cidade;
+  }
+
+  public Pessoa getPessoa() {
+    return pessoa;
+  }
+
+  public void setPessoa(Pessoa pessoa) {
+    this.pessoa = pessoa;
+  }
 }
