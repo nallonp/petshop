@@ -2,15 +2,20 @@ package com.nallon.petshop.utils;
 
 import com.nallon.petshop.domain.Categoria;
 import com.nallon.petshop.domain.Cidade;
+import com.nallon.petshop.domain.Cliente;
+import com.nallon.petshop.domain.Endereco;
 import com.nallon.petshop.domain.Especie;
 import com.nallon.petshop.domain.Estado;
+import com.nallon.petshop.domain.Funcionario;
 import com.nallon.petshop.domain.Pet;
 import com.nallon.petshop.domain.Produto;
 import com.nallon.petshop.domain.Raca;
 import com.nallon.petshop.repository.CategoriaRepository;
 import com.nallon.petshop.repository.CidadeRepository;
+import com.nallon.petshop.repository.EnderecoRepository;
 import com.nallon.petshop.repository.EspecieRepository;
 import com.nallon.petshop.repository.EstadoRepository;
+import com.nallon.petshop.repository.PessoaRepository;
 import com.nallon.petshop.repository.PetRepository;
 import com.nallon.petshop.repository.ProdutoRepository;
 import com.nallon.petshop.repository.RacaRepository;
@@ -37,6 +42,10 @@ public class PopulaDados {
   private EstadoRepository estadoRepository;
   @Autowired
   private CidadeRepository cidadeRepository;
+  @Autowired
+  private PessoaRepository pessoaRepository;
+  @Autowired
+  private EnderecoRepository enderecoRepository;
 
   @PostConstruct
   public void cadastrar() {
@@ -84,8 +93,21 @@ public class PopulaDados {
 
     est1.getCidades().addAll(Arrays.asList(c1, c2));
     est2.getCidades().add(c3);
-    
+
     estadoRepository.saveAll(Arrays.asList(est1, est2));
     cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+
+    Cliente clt1 = new Cliente(null, "Jose Maria", "jose@mail.com", "335.194.320-21", "FISICA");
+    clt1.getTelefones().addAll(Arrays.asList("3516-2000", "9191-0000"));
+
+    Funcionario fnc1 = new Funcionario(null, "Maria Jose", "maria@mail.com", "551.872.200.12", "ATENDENTE");
+    fnc1.getTelefones().addAll(Arrays.asList("3279-0001", "9090-0002"));
+
+    Endereco end1 = new Endereco(null, "Rua Tupis", "500", "Apto 101", "Pindorama", "30111222", c1, clt1);
+    Endereco end2 = new Endereco(null, "Av. Tamoios", "100", "Casa", "Oca", "3968000", c2, fnc1);
+    Endereco end3 = new Endereco(null, "Rua Aranãs", "10", "Apto 201", "Centro", "01153000", c3, fnc1);
+
+    pessoaRepository.saveAll(Arrays.asList(clt1, fnc1));
+    enderecoRepository.saveAll(Arrays.asList(end1, end2, end3));
   }
 }

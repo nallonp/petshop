@@ -2,6 +2,8 @@ package com.nallon.petshop.domain;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Cidade implements Serializable {
@@ -22,6 +25,9 @@ public class Cidade implements Serializable {
   @ManyToOne
   @JoinColumn(name = "id_estado")
   private Estado estado;
+
+  @OneToMany(mappedBy = "cidade")
+  private List<Endereco> enderecos = new ArrayList<>();
 
   public Cidade() {
   }
@@ -71,5 +77,13 @@ public class Cidade implements Serializable {
 
   public void setEstado(Estado estado) {
     this.estado = estado;
+  }
+
+  public List<Endereco> getEnderecos() {
+    return enderecos;
+  }
+
+  public void setEnderecos(List<Endereco> enderecos) {
+    this.enderecos = enderecos;
   }
 }
