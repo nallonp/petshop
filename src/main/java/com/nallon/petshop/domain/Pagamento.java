@@ -12,9 +12,11 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@Table(schema = "petshop")
 public abstract class Pagamento implements Serializable {
 
   @Serial

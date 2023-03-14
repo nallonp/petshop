@@ -4,8 +4,10 @@ import com.nallon.petshop.domain.enuns.SituacaoPagamento;
 import java.io.Serial;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
+@Table(schema = "petshop")
 public class PagDinheiro extends Pagamento {
 
   @Serial
