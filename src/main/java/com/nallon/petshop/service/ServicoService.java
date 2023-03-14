@@ -4,6 +4,7 @@ import com.nallon.petshop.domain.Servico;
 import com.nallon.petshop.repository.ServicoRepository;
 import com.nallon.petshop.service.exceptions.DataIntegrityException;
 import com.nallon.petshop.service.exceptions.ObjetoNaoEncontradoException;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,5 +37,9 @@ public class ServicoService {
     } catch (Exception e) {
       throw new DataIntegrityException("Serviço não pode ser deletado.");
     }
+  }
+
+  public List<Servico> findAll() {
+    return repo.findAll();
   }
 }

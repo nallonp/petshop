@@ -4,6 +4,7 @@ import com.nallon.petshop.domain.Categoria;
 import com.nallon.petshop.repository.CategoriaRepository;
 import com.nallon.petshop.service.exceptions.DataIntegrityException;
 import com.nallon.petshop.service.exceptions.ObjetoNaoEncontradoException;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,4 +39,7 @@ public class CategoriaService {
     }
   }
 
+  public List<Categoria> findAll() {
+    return repo.findAll();
+  }
 }

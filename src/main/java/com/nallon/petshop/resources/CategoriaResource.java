@@ -1,8 +1,11 @@
 package com.nallon.petshop.resources;
 
 import com.nallon.petshop.domain.Categoria;
+import com.nallon.petshop.dto.CategoriaDTO;
 import com.nallon.petshop.service.CategoriaService;
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -46,5 +49,12 @@ public class CategoriaResource {
   public ResponseEntity<Void> delete(@PathVariable Integer id) {
     service.delete(id);
     return ResponseEntity.noContent().build();
+  }
+
+  @GetMapping
+  public ResponseEntity<List<CategoriaDTO>> findAll() {
+    List<Categoria> list = service.findAll();
+    List<CategoriaDTO> dtoList = list.stream().map(CategoriaDTO::new).collect(Collectors.toList());
+    return ResponseEntity.ok().body(dtoList);
   }
 }

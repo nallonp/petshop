@@ -1,8 +1,11 @@
 package com.nallon.petshop.resources;
 
 import com.nallon.petshop.domain.Servico;
+import com.nallon.petshop.dto.ServicoDTO;
 import com.nallon.petshop.service.ServicoService;
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -46,5 +49,12 @@ public class ServicoResource {
   public ResponseEntity<Void> delete(@PathVariable Integer id) {
     service.delete(id);
     return ResponseEntity.noContent().build();
+  }
+
+  @GetMapping
+  public ResponseEntity<List<ServicoDTO>> findAll() {
+    List<Servico> list = service.findAll();
+    List<ServicoDTO> dtoList = list.stream().map(ServicoDTO::new).collect(Collectors.toList());
+    return ResponseEntity.ok().body(dtoList);
   }
 }
