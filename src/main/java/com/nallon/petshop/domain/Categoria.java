@@ -1,5 +1,7 @@
 package com.nallon.petshop.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ public class Categoria implements Serializable {
   @Serial
   private static final long serialVersionUID = 1L;
   @Id
+  @JsonProperty(access = Access.READ_ONLY)
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
   private String nome;

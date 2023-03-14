@@ -1,5 +1,6 @@
 package com.nallon.petshop.resources.exceptions;
 
+import com.nallon.petshop.service.exceptions.DataIntegrityException;
 import com.nallon.petshop.service.exceptions.ObjetoNaoEncontradoException;
 import java.io.Serial;
 import java.io.Serializable;
@@ -20,5 +21,12 @@ public class ResourceExceptionHandler implements Serializable {
       HttpServletRequest request) {
     StandardError error = new StandardError(HttpStatus.NOT_FOUND.value(), exception.getMessage());
     return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+  }
+
+  @ExceptionHandler(DataIntegrityException.class)
+  public ResponseEntity<StandardError> objectNotFound(DataIntegrityException exception,
+      HttpServletRequest request) {
+    StandardError error = new StandardError(HttpStatus.BAD_REQUEST.value(), exception.getMessage());
+    return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
   }
 }
