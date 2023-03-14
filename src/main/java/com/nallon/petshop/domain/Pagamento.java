@@ -14,14 +14,14 @@ import javax.persistence.OneToOne;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Pagamento implements Serializable {
+public abstract class Pagamento implements Serializable {
 
   @Serial
   private static final long serialVersionUID = 1L;
   @Id
   private Integer id;
   private Double valor;
-  private SituacaoPagamento situacaoPagamento;
+  private Integer situacaoPagamento;
   @OneToOne
   @JoinColumn(name = "id_servico")
   @MapsId
@@ -33,7 +33,7 @@ public class Pagamento implements Serializable {
   public Pagamento(Integer id, Double valor, SituacaoPagamento situacaoPagamento, Servico servico) {
     this.id = id;
     this.valor = valor;
-    this.situacaoPagamento = situacaoPagamento;
+    this.situacaoPagamento = situacaoPagamento.getCode();
     this.servico = servico;
   }
 
@@ -72,11 +72,11 @@ public class Pagamento implements Serializable {
   }
 
   public SituacaoPagamento getSituacaoPagamento() {
-    return situacaoPagamento;
+    return SituacaoPagamento.toEnum(this.situacaoPagamento);
   }
 
   public void setSituacaoPagamento(SituacaoPagamento situacaoPagamento) {
-    this.situacaoPagamento = situacaoPagamento;
+    this.situacaoPagamento = situacaoPagamento.getCode();
   }
 
   public Servico getServico() {

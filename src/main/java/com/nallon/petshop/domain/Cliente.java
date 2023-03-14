@@ -1,9 +1,12 @@
 package com.nallon.petshop.domain;
 
 import java.io.Serial;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -13,6 +16,9 @@ public class Cliente extends Pessoa {
   private static final long serialVersionUID = 1L;
 
   private String tipo;
+
+  @OneToMany(mappedBy = "cliente")
+  private List<Servico> servicos = new ArrayList<>();
 
   public Cliente() {
   }
@@ -28,5 +34,13 @@ public class Cliente extends Pessoa {
 
   public void setTipo(String tipo) {
     this.tipo = tipo;
+  }
+
+  public List<Servico> getServicos() {
+    return servicos;
+  }
+
+  public void setServicos(List<Servico> servicos) {
+    this.servicos = servicos;
   }
 }
