@@ -2,6 +2,8 @@ package com.nallon.petshop.domain;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,12 +11,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Pet implements Serializable {
 
   @Serial
   private static final long serialVersionUID = 1L;
+  @OneToMany(mappedBy = "pet")
+  private final List<Servico> servicos = new ArrayList<>();
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
@@ -93,5 +98,9 @@ public class Pet implements Serializable {
 
   public void setRaca(Raca raca) {
     this.raca = raca;
+  }
+
+  public List<Servico> getServicos() {
+    return servicos;
   }
 }
