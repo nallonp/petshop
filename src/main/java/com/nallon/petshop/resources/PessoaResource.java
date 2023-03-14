@@ -1,9 +1,11 @@
 package com.nallon.petshop.resources;
 
 import com.nallon.petshop.domain.Pessoa;
+import com.nallon.petshop.dto.PessoaDTO;
 import com.nallon.petshop.service.PessoaService;
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -50,8 +52,9 @@ public class PessoaResource {
   }
 
   @GetMapping
-  public ResponseEntity<List<Pessoa>> findAll() {
+  public ResponseEntity<List<PessoaDTO>> findAll() {
     List<Pessoa> list = service.findAll();
-    return ResponseEntity.ok().body(list);
+    List<PessoaDTO> dtoList = list.stream().map(PessoaDTO::new).collect(Collectors.toList());
+    return ResponseEntity.ok().body(dtoList);
   }
 }
