@@ -30,6 +30,7 @@ public class Produto implements Serializable {
       joinColumns = @JoinColumn(name = "id_produto"),
       inverseJoinColumns = @JoinColumn(name = "id_categoria"))
   private List<Categoria> categorias = new ArrayList<>();
+  @JsonIgnore
   @ManyToMany(mappedBy = "produtos")
   private List<Servico> servicos = new ArrayList<>();
 

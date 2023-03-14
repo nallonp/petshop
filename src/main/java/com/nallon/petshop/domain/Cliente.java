@@ -1,5 +1,6 @@
 package com.nallon.petshop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ public class Cliente extends Pessoa {
 
   private String tipo;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "cliente")
   private List<Servico> servicos = new ArrayList<>();
 

@@ -1,5 +1,6 @@
 package com.nallon.petshop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serial;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ public class Funcionario extends Pessoa {
 
   private String funcao;
 
+  @JsonIgnore
   @OneToMany(mappedBy = "funcionario")
   private List<Servico> servicos = new ArrayList<>();
 

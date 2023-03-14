@@ -1,5 +1,6 @@
 package com.nallon.petshop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nallon.petshop.domain.enuns.SituacaoPagamento;
 import java.io.Serial;
 import java.io.Serializable;
@@ -22,6 +23,7 @@ public abstract class Pagamento implements Serializable {
   private Integer id;
   private Double valor;
   private Integer situacaoPagamento;
+  @JsonIgnore
   @OneToOne
   @JoinColumn(name = "id_servico")
   @MapsId

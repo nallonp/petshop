@@ -1,5 +1,6 @@
 package com.nallon.petshop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class Servico implements Serializable {
   @ManyToOne
   @JoinColumn(name = "ID_FUNCIONARIO")
   private Funcionario funcionario;
+  @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "ID_PET")
   private Pet pet;
